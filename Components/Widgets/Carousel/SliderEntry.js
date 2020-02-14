@@ -37,7 +37,7 @@ export default class SliderEntry extends Component {
 
   render() {
     const {
-      data: {title, type, rating, location, adv_type},
+      data: {title, type, rating, location, adv_type, type_style},
     } = this.props;
 
     const ProductTitle = title ? (
@@ -75,27 +75,41 @@ export default class SliderEntry extends Component {
             />
           </View>
 
-          <Badge warning style={styles.ratingBadge}>
+          <Badge style={[styles.ratingBadge,{backgroundColor: type_style,}]}>
             <View style={styles.wrapRow}>
               <Text style={styles.textWhite}>{type}</Text>
             </View>
           </Badge>
         </View>
         {/* Description : */}
-        <View style={[styles.textContainer]}>
-          {ProductTitle}
-          <Text style={[styles.type]} numberOfLines={2}>
-            {location}
-          </Text>
-          <Text style={[styles.adv_type]} numberOfLines={2}>
-            {adv_type}
-          </Text>
-
+        <View style={[styles.productContainer]}>
+          <View style={[styles.textContainer]}>
+            {ProductTitle}
+            <Text style={[styles.type]} numberOfLines={2}>
+              {location}
+            </Text>
+            <Text style={[styles.adv_type]} numberOfLines={2}>
+              {adv_type}
+            </Text>
+          </View>
           {/* Discount: */}
           <HappyHour />
         </View>
 
-        <View style={[styles.bookContainer]}></View>
+        <View style={[styles.bookContainer]}>
+          <Text style={[styles.bookedText]} numberOfLines={2}>
+            Booked
+            <Text style={[styles.bookedTextCount]}> 1002 </Text>
+            times since yesterday
+          </Text>
+          <View style={[styles.flexWrap, styles.buttonWrapper]}>
+            <Button transparent style={[styles.bookButton]}>
+              <Text style={[styles.bookButtonText]} numberOfLines={2}>
+                BOOK NOW
+              </Text>
+            </Button>
+          </View>
+        </View>
       </TouchableOpacity>
     );
   }

@@ -23,13 +23,18 @@ export default StyleSheet.create({
     flex: 1,
   },
   exampleContainer: {
-    marginTop: 20,
+    marginTop: 30,
   },
   exampleContainerDark: {
     backgroundColor: colors.black,
   },
   exampleContainerLight: {
     backgroundColor: 'white',
+  },
+  titleContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   title: {
     paddingHorizontal: 10,
@@ -39,6 +44,25 @@ export default StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     textAlign: 'left',
+    alignItems: 'flex-start',
+  },
+  seeMoreButtonContainer: {
+    alignItems: 'flex-end',
+    marginRight: 20,
+    marginTop: 5,
+  },
+  seeMoreButton: {},
+  seeMoreButtonText: {
+    fontSize: 15,
+    color: '#7263c6',
+    lineHeight: 25,
+    fontWeight: 'bold',
+  },
+  arrowRightIcon: {
+    marginLeft: 10,
+    fontSize: 15,
+    color: '#7263c6',
+    lineHeight: 25,
   },
   titleDark: {
     color: colors.black,
@@ -53,7 +77,7 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   slider: {
-    marginTop: 15,
+    marginTop: 0,
     overflow: 'visible', // for custom animations
   },
   sliderContentContainer: {

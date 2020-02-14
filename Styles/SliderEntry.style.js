@@ -10,7 +10,7 @@ function wp(percentage) {
 }
 
 //change width/height of slider here :
-const slideHeight = viewportHeight * 0.5;
+const slideHeight = viewportHeight * 0.6;
 const slideWidth = wp(75);
 const itemHorizontalMargin = wp(2);
 
@@ -30,6 +30,7 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
+    justifyContent: 'space-between',
     position: 'relative',
   },
   starIcon: {
@@ -43,20 +44,30 @@ export default StyleSheet.create({
     borderTopRightRadius: 25,
     paddingRight: 10,
   },
-  ratingBadgeInner: {marginTop: 10, marginLeft: 10},
+  ratingBadgeInner: {
+    marginTop: 10,
+    marginLeft: 10,
+    justifyContent: 'flex-start',
+  },
   wrapRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+  },
+  flexWrap: {
+    flex: 1,
   },
   wrapRowWithSpace: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
   },
-  heartImage: {height: 19, width: 21, marginLeft: 220, marginTop: 10},
-  planetLeft: {height: 19, width: 21, justifyContent: 'flex-start'},
-  planetRight: {height: 19, width: 21, justifyContent: 'flex-end'},
-  planetCenter: {height: 19, width: 21, justifyContent: 'center'},
+  heartImage: {
+    height: 19,
+    width: 21,
+    justifyContent: 'flex-end',
+    marginTop: 15,
+    marginRight: 15,
+  },
   shadow: {
     position: 'absolute',
     top: 20,
@@ -98,26 +109,29 @@ export default StyleSheet.create({
   radiusMaskEven: {
     backgroundColor: colors.black,
   },
-  textContainer: {
+  productContainer: {
     justifyContent: 'center',
     paddingTop: 20 - entryBorderRadius,
-    paddingHorizontal: 16,
     paddingBottom: 20,
     backgroundColor: 'white',
     borderColor: '#f5f5f5',
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
+  },
+  textContainer: {
+    paddingHorizontal: 16,
   },
   bookContainer: {
-    backgroundColor: '#cec9e6',
+    backgroundColor: '#ebe2f5',
     paddingTop: 20 - entryBorderRadius,
-    paddingBottom: 30,
+    paddingBottom: 48,
+    borderColor: '#000',
+    borderBottomLeftRadius: entryBorderRadius,
+    borderBottomRightRadius: entryBorderRadius,
   },
   SvgHalfElips: {
     height: 54,
-    width: itemWidth - entryBorderRadius - 8,
-    marginLeft: -17,
-    marginBottom: -25,
+    //width: itemWidth - entryBorderRadius - 6.5,
+    width: '100%',
+    marginBottom: '-7%',
   },
   textContainerEven: {
     backgroundColor: colors.black,
@@ -142,5 +156,33 @@ export default StyleSheet.create({
   },
   subtitleEven: {
     color: 'rgba(255, 255, 255, 0.7)',
+  },
+  bookedText: {
+    color: colors.black,
+    fontSize: 12,
+    fontFamily: 'sans-serif',
+    alignSelf: 'center',
+    marginBottom: 10,
+    marginTop: 5,
+  },
+  buttonWrapper: {
+    borderColor: '#000',
+    borderTopWidth: 0.5,
+  },
+  bookedTextCount: {
+    color: colors.black,
+    fontSize: 12,
+    fontFamily: 'sans-serif',
+    fontWeight: 'bold',
+  },
+  bookButton: {
+    backgroundColor: 'rgba(0,0,0,0)',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  bookButtonText: {
+    color: '#ff8559',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
