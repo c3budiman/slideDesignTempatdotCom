@@ -44,8 +44,19 @@ export default StyleSheet.create({
     paddingRight: 10,
   },
   ratingBadgeInner: {marginTop: 10, marginLeft: 10},
-  wrapRow: {flexDirection: 'row', flexWrap: 'wrap'},
+  wrapRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  wrapRowWithSpace: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
   heartImage: {height: 19, width: 21, marginLeft: 220, marginTop: 10},
+  planetLeft: {height: 19, width: 21, justifyContent: 'flex-start'},
+  planetRight: {height: 19, width: 21, justifyContent: 'flex-end'},
+  planetCenter: {height: 19, width: 21, justifyContent: 'center'},
   shadow: {
     position: 'absolute',
     top: 20,
@@ -99,13 +110,14 @@ export default StyleSheet.create({
   },
   bookContainer: {
     backgroundColor: '#cec9e6',
-    paddingTop:20 - entryBorderRadius,
-    paddingBottom:30,
+    paddingTop: 20 - entryBorderRadius,
+    paddingBottom: 30,
   },
   SvgHalfElips: {
-    height:30,
-    width:itemWidth-entryBorderRadius-10,
-    marginLeft: -16,
+    height: 54,
+    width: itemWidth - entryBorderRadius - 8,
+    marginLeft: -17,
+    marginBottom: -25,
   },
   textContainerEven: {
     backgroundColor: colors.black,

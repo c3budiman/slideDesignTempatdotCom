@@ -4,27 +4,7 @@ import PropTypes from 'prop-types';
 import {ParallaxImage} from 'react-native-snap-carousel';
 import styles from '../../../Styles/SliderEntry.style';
 import {Badge, Button, Icon} from 'native-base';
-import Svg, {
-  Circle,
-  Ellipse,
-  G,
-  TSpan,
-  TextPath,
-  Path,
-  Polygon,
-  Polyline,
-  Line,
-  Rect,
-  Use,
-  Symbol,
-  Defs,
-  LinearGradient,
-  RadialGradient,
-  Stop,
-  ClipPath,
-  Pattern,
-  Mask,
-} from 'react-native-svg';
+import HappyHour from '../Particles/HappyHour';
 
 export default class SliderEntry extends Component {
   static propTypes = {
@@ -111,25 +91,11 @@ export default class SliderEntry extends Component {
             {adv_type}
           </Text>
 
-          {/* Book: */}
-          <Svg style={[styles.SvgHalfElips]}>
-            <Ellipse
-              cx="50%"
-              cy="50%"
-              rx="50%"
-              ry="50%"
-              stroke="purple"
-              strokeWidth="2"
-              fill="yellow"
-            />
-          </Svg>
-          
+          {/* Discount: */}
+          <HappyHour />
         </View>
-        
 
-        <View style={[styles.bookContainer]}>
-          
-        </View>
+        <View style={[styles.bookContainer]}></View>
       </TouchableOpacity>
     );
   }
