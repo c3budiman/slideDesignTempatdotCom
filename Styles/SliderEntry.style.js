@@ -35,10 +35,10 @@ export default StyleSheet.create({
   },
   starIcon: {
     fontSize: 15,
-    color: '#fff',
+    color: colors.white,
     lineHeight: 25,
   },
-  textWhite: {color: '#fff', marginLeft: 5, lineHeight: 25},
+  textWhite: {color: colors.white, marginLeft: 5, lineHeight: 25},
   ratingBadge: {
     borderRadius: 0,
     borderTopRightRadius: 25,
@@ -74,7 +74,7 @@ export default StyleSheet.create({
     left: itemHorizontalMargin,
     right: itemHorizontalMargin,
     bottom: 18,
-    shadowColor: '#000',
+    shadowColor: colors.realBlack,
     shadowOpacity: 0.25,
     shadowOffset: {width: 10, height: 10},
     shadowRadius: 20,
@@ -114,16 +114,16 @@ export default StyleSheet.create({
     paddingTop: 20 - entryBorderRadius,
     paddingBottom: 20,
     backgroundColor: 'white',
-    borderColor: '#f5f5f5',
+    borderColor: colors.semiGray,
   },
   textContainer: {
     paddingHorizontal: 16,
   },
   bookContainer: {
-    backgroundColor: '#ebe2f5',
+    backgroundColor: colors.purpleBG,
     paddingTop: 20 - entryBorderRadius,
     paddingBottom: 48,
-    borderColor: '#000',
+    borderColor: colors.realBlack,
     borderBottomLeftRadius: entryBorderRadius,
     borderBottomRightRadius: entryBorderRadius,
   },
@@ -151,11 +151,8 @@ export default StyleSheet.create({
   },
   adv_type: {
     marginTop: 6,
-    color: '#808080',
+    color: colors.gray,
     fontSize: 12,
-  },
-  subtitleEven: {
-    color: 'rgba(255, 255, 255, 0.7)',
   },
   bookedText: {
     color: colors.black,
@@ -166,7 +163,7 @@ export default StyleSheet.create({
     marginTop: 5,
   },
   buttonWrapper: {
-    borderColor: '#000',
+    borderColor: colors.realBlack,
     borderTopWidth: 0.5,
   },
   bookedTextCount: {
@@ -176,12 +173,12 @@ export default StyleSheet.create({
     fontWeight: 'bold',
   },
   bookButton: {
-    backgroundColor: 'rgba(0,0,0,0)',
+    backgroundColor: colors.transparent,
     flexDirection: 'row',
     justifyContent: 'center',
   },
   bookButtonText: {
-    color: '#ff8559',
+    color: colors.orange,
     fontWeight: 'bold',
     textAlign: 'center',
   },

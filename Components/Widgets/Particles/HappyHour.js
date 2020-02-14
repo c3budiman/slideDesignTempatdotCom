@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import {View} from 'react-native';
 import styles from '../../../Styles/SliderEntry.style';
 import Svg, {Ellipse, Image, Text} from 'react-native-svg';
+import {colors} from '../../../Styles/index.style.js';
 
 export default class HappyHour extends Component {
   render() {
     return (
-      <View >
+      <View>
         <Svg style={[styles.SvgHalfElips]}>
           <Ellipse
             cx="50%"
@@ -15,7 +16,7 @@ export default class HappyHour extends Component {
             ry="65%"
             stroke="purple"
             strokeWidth="1"
-            fill="#ebe2f5"
+            fill={colors.purpleBG}
           />
           <View style={styles.wrapRowWithSpace}>
             <Text

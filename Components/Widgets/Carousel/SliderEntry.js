@@ -56,7 +56,7 @@ export default class SliderEntry extends Component {
           alert(`Clicked on product : '${title}'`);
         }}>
         <View style={styles.shadow} />
-        {/* Image : */}
+        {/* Start Image  Section : */}
         <View style={[styles.imageContainer]}>
           {this.image}
           <View style={[styles.radiusMask]} />
@@ -81,6 +81,7 @@ export default class SliderEntry extends Component {
             </View>
           </Badge>
         </View>
+        {/* End Image Section */}
         {/* Description : */}
         <View style={[styles.productContainer]}>
           <View style={[styles.textContainer]}>
@@ -92,10 +93,12 @@ export default class SliderEntry extends Component {
               {adv_type}
             </Text>
           </View>
-          {/* Discount: */}
+          {/* Discount/Planetary: */}
           <HappyHour />
+          {/* Discount/Planetary: */}
         </View>
 
+        {/* Book Section */}
         <View style={[styles.bookContainer]}>
           <Text style={[styles.bookedText]} numberOfLines={2}>
             Booked
@@ -110,6 +113,7 @@ export default class SliderEntry extends Component {
             </Button>
           </View>
         </View>
+        {/* End of Book Section */}
       </TouchableOpacity>
     );
   }

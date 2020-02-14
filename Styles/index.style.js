@@ -5,6 +5,13 @@ export const colors = {
   gray: '#888888',
   background1: '#eaeaea',
   background2: '#21D4FD',
+  purple: '#7263c6',
+  white: '#fff',
+  realBlack: '#000',
+  semiGray: '#f5f5f5',
+  purpleBG: '#ebe2f5',
+  transparent: 'rgba(0,0,0,0)',
+  orange: '#ff8559',
 };
 
 export default StyleSheet.create({
@@ -22,14 +29,8 @@ export default StyleSheet.create({
   scrollview: {
     flex: 1,
   },
-  exampleContainer: {
+  sliderContainer: {
     marginTop: 30,
-  },
-  exampleContainerDark: {
-    backgroundColor: colors.black,
-  },
-  exampleContainerLight: {
-    backgroundColor: 'white',
   },
   titleContainer: {
     flex: 1,
@@ -54,27 +55,15 @@ export default StyleSheet.create({
   seeMoreButton: {},
   seeMoreButtonText: {
     fontSize: 15,
-    color: '#7263c6',
+    color: colors.purple,
     lineHeight: 25,
     fontWeight: 'bold',
   },
   arrowRightIcon: {
     marginLeft: 10,
     fontSize: 15,
-    color: '#7263c6',
+    color: colors.purple,
     lineHeight: 25,
-  },
-  titleDark: {
-    color: colors.black,
-  },
-  subtitle: {
-    marginTop: 5,
-    paddingHorizontal: 30,
-    backgroundColor: 'transparent',
-    color: 'rgba(255, 255, 255, 0.75)',
-    fontSize: 13,
-    fontStyle: 'italic',
-    textAlign: 'center',
   },
   slider: {
     marginTop: 0,
