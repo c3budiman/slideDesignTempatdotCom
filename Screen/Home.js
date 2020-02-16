@@ -17,6 +17,9 @@ import {DEALS, POPULARPLACE} from '../Static/entries';
 import {Button, Icon} from 'native-base';
 import styles2 from '../Styles/Search.style';
 import {Item, Input, Content, Card, CardItem, Body} from 'native-base';
+import { Base_url,Client_token } from '../env'
+
+var cancel;
 
 export default class App extends Component {
   constructor(props) {
@@ -74,6 +77,17 @@ export default class App extends Component {
     );
   }
 
+  _renderSearchResult(data) {
+    
+    <Card>
+      <CardItem bordered style={styles2.aktivitasCard}>
+        <Body>
+          <Text>Merchant</Text>
+        </Body>
+      </CardItem>
+    </Card>
+  }
+
   handleTitleInputSubmit() {
     this.setState({
       FocusedSearching: true,
@@ -86,23 +100,109 @@ export default class App extends Component {
       FocusedSearching: true,
     });
   }
+
   notSearching() {
     //Alert.alert('stop typing');
     this.setState({
       FocusedSearching: false,
+      searchResult: null,
+      keyword: '',
     });
   }
 
+  objToQueryString(obj) {
+    const keyValuePairs = [];
+    for (const key in obj) {
+      keyValuePairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]));
+    }
+    return keyValuePairs.join('&');
+  }
+
+  doSearching(keyword) {
+    if(keyword.length>1) {
+      if(this.timeout) {
+        console.log('canceled')
+        clearTimeout(this.timeout);
+      }
+    
+      this.timeout = setTimeout(() => {
+          if (cancel != undefined) {
+              cancel();
+          }
+          fetch(Base_url+'/api/v2/search?page=1&per_page=10&class=provinsi&idx=11&query='+keyword, {
+            method:'GET',
+            headers: {
+              'Accept'       : 'application/json',
+              'Authorization': 'Bearer ' + Client_token,
+              'Content-Type' : 'application/json'
+            }
+          })
+          .then((response) => response.json())
+          .then((json) => {
+            if (json.error) {
+              alert(json.error)
+            } else {
+              if(json.status) {
+                //this._renderSearchResult(json.data)
+                this.setState({searchResult: json.data});
+                console.log(this.state.searchResult);
+              } else {
+                Alert.alert('Error!','idk what just error.')
+                console.error(error)
+                console.log(error);
+              }
+            }
+          })
+          .catch((error) => {
+            Alert.alert('Error!','idk what just error.')
+            console.error(error)
+            console.log(error);
+          })
+        }, 600);
+    }
+  }
+  
+  startTyping(text){
+    console.log(text)
+    this.setState({
+      keyword:text,
+    })
+    this.doSearching(text);
+  }
+
   render() {
-    //console.log(this.state.FocusedSearching);
-    const FillHomePage = this.state.keyword == '' ? (
-      this._renderSlider(DEALS, `Deals of the Day`)
+    //console.log(Base_url);
+    const FillHomePage = this.state.searchResult == null ? (
+      this._renderSlider(POPULARPLACE, `Popular Place in Jakarta`)
     ) :
     (
-      this._renderSlider(POPULARPLACE, `Popular Place in Jakarta`)
+      this._renderSearchResult(this.state.searchResult)
     );
-    
-    const HomePage = this.state.FocusedSearching ? (
+
+    const searchResult = this.state.searchResult ? (
+      this._renderSearchResult(this.state.searchResult)
+      
+    ) : (
+      <Card>
+        <CardItem bordered style={styles2.aktivitasCard}>
+          <Body>
+            <Text>Aktivitas</Text>
+          </Body>
+        </CardItem>
+        <CardItem bordered>
+          <Body>
+            <Text> <Icon type="FontAwesome" active name="search" /> {" "} Daycation</Text>
+          </Body>
+        </CardItem>
+        <CardItem bordered>
+          <Body>
+            <Text> <Icon type="FontAwesome" active name="search" /> {" "} Restaurant</Text>
+          </Body>
+        </CardItem>
+      </Card>
+    )
+
+    const HomePage = !this.state.FocusedSearching ? (
       <View style={styles.container}>
         <StatusBar
           translucent={true}
@@ -172,28 +272,15 @@ export default class App extends Component {
                     style={styles2.textBox}
                     onFocus={() => this.startSearching()}
                     onBlur={() => this.notSearching()}
+                    autoFocus
                     onSubmitEditing={this.handleTitleInputSubmit}
                     placeholder="Cari restoran, cafe, meeting atau keyword lainnya"
+                    onChangeText={(text) => this.startTyping(text)}
                   />
                   <Icon type="FontAwesome" active name="search" />
                 </Item>
-                <Card>
-                    <CardItem bordered>
-                      <Body>
-                        <Text>Aktivitas</Text>
-                      </Body>
-                    </CardItem>
-                    <CardItem bordered>
-                      <Body>
-                        <Text>Daycation</Text>
-                      </Body>
-                    </CardItem>
-                    <CardItem bordered>
-                      <Body>
-                        <Text>Restaurant</Text>
-                      </Body>
-                    </CardItem>
-                  </Card>
+                
+                {searchResult}
               </View>
             </View>
           </View>

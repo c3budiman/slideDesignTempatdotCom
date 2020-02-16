@@ -62,4 +62,7 @@ export default StyleSheet.create({
     fontSize: 12,
     fontWeight: 'bold',
   },
+  aktivitasCard : {
+    backgroundColor: colors.background1,
+  },
 });
