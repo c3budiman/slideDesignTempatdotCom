@@ -42,7 +42,7 @@ export default StyleSheet.create({
     marginTop: 10,
     backgroundColor: 'transparent',
     color: '#000',
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'left',
     alignItems: 'flex-start',

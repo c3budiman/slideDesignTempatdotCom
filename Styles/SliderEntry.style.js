@@ -62,11 +62,12 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
   },
   heartImage: {
-    height: 19,
-    width: 21,
+    height: 20,
+    width: 25,
     justifyContent: 'flex-end',
     marginTop: 15,
     marginRight: 15,
+    resizeMode: 'stretch',
   },
   shadow: {
     position: 'absolute',
@@ -140,9 +141,6 @@ export default StyleSheet.create({
     color: colors.black,
     fontSize: 20,
     fontWeight: 'bold',
-  },
-  titleEven: {
-    color: 'white',
   },
   type: {
     marginTop: 6,
