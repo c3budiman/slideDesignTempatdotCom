@@ -10,9 +10,10 @@ function wp(percentage) {
 }
 
 //change width/height here :
-const slideHeight = viewportHeight * 0.4;
+const slideHeight = viewportHeight * 0.3;
 const slideWidth = wp(75);
 const itemHorizontalMargin = wp(2);
+const marginBottom = wp(40);
 
 export const sliderWidth = viewportWidth;
 export const itemWidth = slideWidth + itemHorizontalMargin * 2;
@@ -26,6 +27,11 @@ export default StyleSheet.create({
     backgroundColor: colors.background1,
     width: '100%',
     height: slideHeight,
+    position: 'absolute',
+    zIndex: 99,
+    left: 0,
+    right: 0,
+    justifyContent: 'flex-start',
   },
   image: {
     ...StyleSheet.absoluteFillObject,
@@ -35,8 +41,15 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     flexWrap: 'wrap',
-    justifyContent: 'center',
-    position: 'relative',
+    marginTop: '20%',
+    //justifyContent: 'center',
+  },
+  containerItemInsideImage2: {
+    flex: 1,
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+    marginTop: '2%',
+    //justifyContent: 'center',
   },
   findDeal: {
     backgroundColor: 'transparent',
@@ -62,7 +75,25 @@ export default StyleSheet.create({
     fontSize: 12,
     fontWeight: 'bold',
   },
-  aktivitasCard : {
+  aktivitasCard: {
     backgroundColor: colors.background1,
   },
+  ContainerCardItemRow: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  ContainerCardItemColumn: {
+    flex: 1,
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+  },
+  ItemTouchable: {
+    zIndex: 999,
+    //position: 'absolute',
+    left: 0,
+    right: 0,
+    justifyContent: 'flex-start',
+  }
+  
 });

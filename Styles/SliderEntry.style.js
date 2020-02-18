@@ -14,6 +14,7 @@ const slideHeight = viewportHeight * 0.6;
 const slideWidth = wp(75);
 const itemHorizontalMargin = wp(2);
 
+
 export const sliderWidth = viewportWidth;
 export const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
@@ -25,6 +26,8 @@ export default StyleSheet.create({
     height: slideHeight,
     paddingHorizontal: itemHorizontalMargin,
     paddingBottom: 18, // needed for shadow
+    position: 'relative',
+    justifyContent: 'flex-start'
   },
   containerType: {
     flex: 1,
@@ -70,7 +73,7 @@ export default StyleSheet.create({
     resizeMode: 'stretch',
   },
   shadow: {
-    position: 'absolute',
+    //position: 'absolute',
     top: 20,
     left: itemHorizontalMargin,
     right: itemHorizontalMargin,
@@ -100,7 +103,7 @@ export default StyleSheet.create({
   },
   // image's border radius is buggy on iOS; let's hack it!
   radiusMask: {
-    position: 'absolute',
+    //position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,

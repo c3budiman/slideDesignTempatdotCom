@@ -22,15 +22,13 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background1,
-  },
-  gradient: {
-    ...StyleSheet.absoluteFillObject,
+    flexDirection: 'column'
   },
   scrollview: {
     flex: 1,
   },
   sliderContainer: {
-    marginTop: 30,
+    justifyContent: 'flex-start',
   },
   titleContainer: {
     flex: 1,
@@ -39,7 +37,7 @@ export default StyleSheet.create({
   },
   title: {
     paddingHorizontal: 10,
-    marginTop: 10,
+    //marginTop: 10,
     backgroundColor: 'transparent',
     color: '#000',
     fontSize: 20,
@@ -81,4 +79,10 @@ export default StyleSheet.create({
     borderRadius: 4,
     marginHorizontal: 8,
   },
+  stretch: {
+    marginTop: '60%',
+    width: 0,
+    height: 0,
+    resizeMode: 'stretch'
+  }
 });
