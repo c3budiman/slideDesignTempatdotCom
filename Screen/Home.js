@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
   ScrollView,
@@ -11,17 +11,15 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import {sliderWidth, itemWidth} from '../Styles/SliderEntry.style';
+import { sliderWidth, itemWidth } from '../Styles/SliderEntry.style';
 import SliderEntry from '../Components/Widgets/Carousel/SliderEntry';
 import styles from '../Styles/index.style.js';
-import {DEALS, POPULARPLACE} from '../Static/entries';
-import {Button, Icon} from 'native-base';
+import { DEALS, POPULARPLACE } from '../Static/entries';
+import { Button, Icon } from 'native-base';
 import styles2 from '../Styles/Search.style';
-import {Item, Input, Content,Left,Thumbnail, Card, CardItem, Body} from 'native-base';
-import {Base_url, Client_id, Client_secret} from '../env';
+import { Item, Input, Content, Left, Thumbnail, Card, CardItem, Body } from 'native-base';
+import { Base_url, Client_id, Client_secret } from '../env';
 import AsyncStorage from '@react-native-community/async-storage';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
 var cancel;
 
@@ -37,11 +35,11 @@ export default class App extends Component {
       mappedSearchResult: null,
     };
     AsyncStorage.getItem('token', (error, result) => {
-        if (result) {
-            this.setState({
-                Token: result
-            });
-        }
+      if (result) {
+        this.setState({
+          Token: result
+        });
+      }
     });
   }
 
@@ -75,13 +73,13 @@ export default class App extends Component {
     this.fetchToken();
   }
 
-  _renderItem({item, index}) {
+  _renderItem({ item, index }) {
     return <SliderEntry data={item} />;
   }
 
   _renderSlider(data, header) {
     return (
-      <View style={[styles.sliderContainer, this.state.FocusedSearching ? {opacity: 0.5} : {opacity: 1} ]}>
+      <View style={[styles.sliderContainer, this.state.FocusedSearching ? { opacity: 0.5 } : { opacity: 1 }]}>
         {/* Header Text : */}
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{header}</Text>
@@ -135,12 +133,12 @@ export default class App extends Component {
 
   notSearching() {
     //Alert.alert('stop typing');
-    // this.setState({
-    //   //FocusedSearching: false,
-    //   //searchResult: null,
-    //   //mappedSearchResult: null,
-    //   //keyword: '',
-    // });
+    this.setState({
+      FocusedSearching: false,
+      searchResult: null,
+      mappedSearchResult: null,
+      keyword: '',
+    });
   }
 
   doSearching(keyword) {
@@ -156,15 +154,13 @@ export default class App extends Component {
             cancel();
           }
           fetch(
-            Base_url +
-              '/api/v2/search?page=1&per_page=10&class=provinsi&idx=7&query=' +
-              keyword,
+            'https://tempat.com' +
+            '/api/autocomplete/merchant?areaId=7&areaClass=provinsi&query=' +
+            keyword,
             {
               method: 'GET',
               headers: {
                 Accept: 'application/json',
-                Authorization: 'Bearer ' + this.state.Token,
-                'Content-Type': 'application/json',
               },
             },
           )
@@ -173,21 +169,22 @@ export default class App extends Component {
               if (json.error) {
                 alert(json.error);
               } else {
+                console.log(json.data)
                 if (json.status) {
                   //this._renderSearchResult(json.data)
-                  this.setState({searchResult: json.data});
+                  this.setState({ searchResult: json.data });
                   this.mapSearchResult();
                   console.log(this.state.searchResult);
                 } else {
-                  Alert.alert('Error!', 'idk what just error.');
-                  console.error(error);
+                  //Alert.alert('Error!', 'idk what just error.');
+                  //console.error(error);
                   console.log(error);
                 }
               }
             })
             .catch(error => {
-              Alert.alert('Error!', 'idk what just error.');
-              console.error(error);
+              //Alert.alert('Error!', 'idk what just error.');
+              //console.error(error);
               console.log(error);
             });
         }, 600);
@@ -207,7 +204,7 @@ export default class App extends Component {
 
   namesplit(data, returntype) {
     var split = data.split("-");
-    if(returntype == "branch_name") {
+    if (returntype == "branch_name") {
       return split[0];
     } else {
       return split[1];
@@ -215,8 +212,8 @@ export default class App extends Component {
   }
 
   processImage(data) {
-    if(data) {
-      return data['image_url_thumb'];
+    if (data) {
+      return data;
     } else {
       return "https://tempat.com/img/activities/restaurant.png";
     }
@@ -224,47 +221,53 @@ export default class App extends Component {
 
   mapSearchResult() {
     if (this.state.searchResult.length > 0) {
+      console.log(this.state.searchResult.length)
       let mappedSearchResult = this.state.searchResult.map(pic => {
         return (
           <TouchableOpacity
-              activeOpacity={1}
-              style={styles2.ItemTouchable}
-              onPress={() => {
-                alert(`Clicked on product : ` + pic['_source']['branch_group_activity'][0]['activity_group']['group_name']);
-              }}
-              >
-                <CardItem key={pic['_source']['id']} bordered>
-                    <Left>
-                        <Thumbnail source={{uri: this.processImage(pic['_source']['branch_images']) }} />
-                        <Body>
-                          <Text style>{this.namesplit(pic['_source']['branch_name'],'branch_name')}</Text>
-                          <Text note>{pic['_source']['branch_group_activity'][0]['activity_group']['group_name']} - {this.namesplit(pic['_source']['branch_name'],'type')}</Text>
-                        </Body>
-                      </Left>
-                </CardItem>
+            key={pic['id']}
+            activeOpacity={1}
+            style={styles2.ItemTouchable}
+            onPress={() => {
+              alert(`Clicked on product : ` + pic['name']);
+              this.props.navigation.navigate('Details', {
+                slug: pic['slug'],
+              })
+              this.notSearching()
+            }}
+          >
+            <CardItem bordered>
+              <Left>
+                <Thumbnail source={{ uri: this.processImage(pic['img']) }} />
+                <Body>
+                  <Text style>{this.namesplit(pic['name'], 'branch_name')}</Text>
+                  <Text note>{pic['activity']['name']} - {pic['place']}</Text>
+                </Body>
+              </Left>
+            </CardItem>
           </TouchableOpacity>
-          );
+        );
       });
-      this.setState({mappedSearchResult: mappedSearchResult});
+      this.setState({ mappedSearchResult: mappedSearchResult });
     } else {
       let mappedSearchResult = (
         <TouchableOpacity
-              activeOpacity={1}
-              style={styles.slideInnerContainer}
-              >
-              
-              <CardItem bordered>
-                  <Left>
-                      <Thumbnail source={{uri: "https://tempat.com/img/activities/restaurant.png"}} />
-                      <Body>
-                        <Text style>Not Found</Text>
-                      </Body>
-                    </Left>
-              </CardItem>
+          activeOpacity={1}
+          style={styles.slideInnerContainer}
+        >
+
+          <CardItem bordered>
+            <Left>
+              <Thumbnail source={{ uri: "https://tempat.com/img/activities/restaurant.png" }} />
+              <Body>
+                <Text style>Not Found</Text>
+              </Body>
+            </Left>
+          </CardItem>
         </TouchableOpacity>
       )
-      
-      this.setState({mappedSearchResult: mappedSearchResult});
+
+      this.setState({ mappedSearchResult: mappedSearchResult });
     }
   }
 
@@ -279,42 +282,42 @@ export default class App extends Component {
         {this.state.mappedSearchResult}
       </Card>
     ) : (
-      <Card>
-        <TouchableOpacity
-              activeOpacity={1}
-              style={styles.slideInnerContainer}
-              onPress={() => {
-                this.props.navigation.navigate('Details')
-              }}>
-          <CardItem style={styles2.aktivitasCard} bordered>
+        <Card>
+          <TouchableOpacity
+            activeOpacity={1}
+            style={styles.slideInnerContainer}
+            onPress={() => {
+              this.props.navigation.navigate('Details')
+            }}>
+            <CardItem style={styles2.aktivitasCard} bordered>
+              <Body>
+                <Text>Aktivitas</Text>
+              </Body>
+            </CardItem>
+          </TouchableOpacity>
+          <CardItem bordered>
             <Body>
-              <Text>Aktivitas</Text>
+              <Text>
+                {' '}
+                <Icon type="FontAwesome" active name="search" /> Daycation
+            </Text>
             </Body>
           </CardItem>
-        </TouchableOpacity>
-        <CardItem bordered>
-          <Body>
-            <Text>
-              {' '}
-              <Icon type="FontAwesome" active name="search" /> Daycation
+          <CardItem bordered>
+            <Body>
+              <Text>
+                {' '}
+                <Icon type="FontAwesome" active name="search" /> Restaurant
             </Text>
-          </Body>
-        </CardItem>
-        <CardItem bordered>
-          <Body>
-            <Text>
-              {' '}
-              <Icon type="FontAwesome" active name="search" /> Restaurant
-            </Text>
-          </Body>
-        </CardItem>
-      </Card>
-    );
+            </Body>
+          </CardItem>
+        </Card>
+      );
 
     const SearchBar = !this.state.FocusedSearching ? (
       <View style={[styles2.imageContainer]}>
         <Image
-          source={{uri: 'https://tempat.com/img/Home.png'}}
+          source={{ uri: 'https://tempat.com/img/Home.png' }}
           style={styles2.image}
         />
         <View style={styles2.containerItemInsideImage}>
@@ -325,7 +328,6 @@ export default class App extends Component {
                 ref={c => (this._input = c)}
                 style={styles2.textBox}
                 onFocus={() => this.startSearching()}
-                onBlur={() => this.notSearching()}
                 onSubmitEditing={this.handleTitleInputSubmit}
                 placeholder="Cari restoran, cafe, meeting atau keyword lainnya"
               />
@@ -335,33 +337,56 @@ export default class App extends Component {
         </View>
       </View>
     ) : (
-      <View style={[styles2.imageContainer]}>
-        <Image
-          source={{uri: 'https://tempat.com/img/Home.png'}}
-          style={styles2.image}
-        />
-        <View style={styles2.containerItemInsideImage2}>
-          <View style={styles2.ContainerTextBox}>
-            <Item style={styles2.searchTextBox}>
-              <Input
-                ref={c => (this._input = c)}
-                style={styles2.textBox}
-                onFocus={() => this.startSearching()}
-                onBlur={() => this.notSearching()}
-                autoFocus
-                onSubmitEditing={this.handleTitleInputSubmit}
-                placeholder="Cari restoran, cafe, meeting atau keyword lainnya"
-                onChangeText={text => this.startTyping(text)}
-              />
-              <Icon type="FontAwesome" active name="search" />
-            </Item>
-            {/* Search Result here : */}
-            <View style={styles2.tes}>{searchResult}</View>
-            {/* Search Result here : */}
-          </View>
+        <View style={[styles2.imageContainer]}>
+          <Image
+            source={{ uri: 'https://tempat.com/img/Home.png' }}
+            style={styles2.image}
+          />
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={this.state.FocusedSearching}
+            presentationStyle='overFullScreen'
+            onRequestClose={() => {
+              this.notSearching()
+            }}
+          >
+            <ScrollView>
+              <TouchableOpacity
+                activeOpacity={1}
+                style={styles.slideInnerContainer}
+                onPress={() => {
+                  this.notSearching()
+                }}>
+                <View style={styles2.containerItemInsideImage2}>
+                  <View style={styles2.ContainerTextBox}>
+                    <Item style={styles2.searchTextBox}>
+                      <Input
+                        ref={c => (this._input = c)}
+                        style={styles2.textBox}
+                        onFocus={() => this.startSearching()}
+                        autoFocus
+                        onSubmitEditing={this.handleTitleInputSubmit}
+                        placeholder="Cari restoran, cafe, meeting atau keyword lainnya"
+                        onChangeText={text => this.startTyping(text)}
+                      />
+                      <Icon type="FontAwesome" active name="search" />
+                    </Item>
+                    {/* Search Result here : */}
+                    <View style={styles2.tes}>{searchResult}</View>
+                    {/* Search Result here : */}
+                  </View>
+                </View>
+
+              </TouchableOpacity>
+
+            </ScrollView>
+
+
+          </Modal>
+
         </View>
-      </View>
-    );
+      );
 
     return (
       <SafeAreaView style={styles.safeArea}>
@@ -382,7 +407,7 @@ export default class App extends Component {
             {/* For the categories later use, for now it is just an invisible padding : */}
             <Image
               style={styles.stretch}
-              source={{uri : "https://tempat.com/img/activities/restaurant.png"}}
+              source={{ uri: "https://tempat.com/img/activities/restaurant.png" }}
             />
 
             {this._renderSlider(DEALS, `Deals of the Day`)}

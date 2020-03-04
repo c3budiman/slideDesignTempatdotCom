@@ -37,6 +37,10 @@ export default StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     resizeMode: 'stretch',
   },
+  image2: {
+    ...StyleSheet.absoluteFillObject,
+    resizeMode: 'cover',
+  },
   containerItemInsideImage: {
     flex: 1,
     flexDirection: 'column',
@@ -58,6 +62,12 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: -20,
+  },
+  happyHour: {
+    backgroundColor: 'transparent',
+    color: colors.white,
+    fontSize: 22,
+    fontWeight: 'bold',
   },
   ContainerTextBox: {
     width: '90%',
@@ -94,6 +104,36 @@ export default StyleSheet.create({
     left: 0,
     right: 0,
     justifyContent: 'flex-start',
+  },
+  percentageDisc: {
+    backgroundColor: 'transparent',
+    color: colors.white,
+    fontSize: 15,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: '20%'
+  },
+  percentageDiscInact: {
+    backgroundColor: 'transparent',
+    color: 'rgb(245, 144, 250)',
+    fontSize: 15,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: '20%'
+  },
+  textScheduleHours : {
+    backgroundColor: 'transparent',
+    color: colors.white,
+    fontSize: 8,
+    textAlign: 'center',
+    marginTop: '70%'
+  },
+  textScheduleHoursInact: {
+    backgroundColor: 'transparent',
+    color: colors.realBlack,
+    fontSize: 8,
+    textAlign: 'center',
+    marginTop: '70%'
   }
-  
+
 });
